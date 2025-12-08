@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Final Results</title>
+    <link rel="stylesheet" href="{% static 'result.css' %}">
+</head>
+<body>
+    <div class="logout-link">
+        <a href="{% url 'logout' %}">Logout</a>
+    </div>
+    <div class="container">
+        <h1>This Month Metabollic Health Generation</h1>
+        <p>Predicted values based on your inputs over a simulated period.</p>
+
+        <div class="result-card">
+            <h2>Your Test Results</h2>
+            <div class="legend">
+                <span class="input-value">Last Month</span> | <span class="predicted-value">This Month</span>
+            </div>
+
+            <!-- 1. Cholesterol -->
+            <div class="metric-row">
+                <span class="metric-name">Cholesterol (mg/dL):</span>
+                <div class="value-group">
+                    <span class="input-value">{{ cholesterol_level }}</span>
+                    <span class="predicted-value">{{ future_cholesterol }}</span>
+                </div>
+            </div>
+
+            <!-- 2. Glucose Level (Blood Sugar) -->
+            <div class="metric-row">
+                <span class="metric-name">Glucose Level (mg/dL):</span>
+                <div class="value-group">
+                    <span class="input-value">{{ glucose_level }}</span>
+                    <span class="predicted-value">{{ future_glucose }}</span>
+                </div>
+            </div>
+
+            <!-- 3. Systolic Blood Pressure -->
+            <div class="metric-row">
+                <span class="metric-name">Systolic BP (mmHg):</span>
+                <div class="value-group">
+                    <span class="input-value">{{ systolic_bp }}</span>
+                    <span class="predicted-value">{{ future_bp }}</span>
+                </div>
+            </div>
+        </div>
+
+        <p style="font-style: italic; font-size: 0.9em; margin-top: 25px; color: #777;">
+            Note: These values are purely hypothetical predictions from an AI-generated model. For medical diagnosis, consultation, or advice, please consult a qualified Doctor.
+        </p>
+        
+        <div class="btn-group">
+            <a href="{% url 'predictor:input_form' %}" class="new-prediction-btn">Start New Prediction</a>
+        </div>
+    </div>
+</body>
+</html>

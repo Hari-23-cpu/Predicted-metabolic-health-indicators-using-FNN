@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Test Input for your Healthy life!</title>
+    <link rel="stylesheet" href="{% static 'input.css' %}">
+</head>
+<body>
+    <div class="logout-link">
+        <a href="{% url 'logout' %}">Logout</a>
+    </div>
+    <div class="container">
+        <h1>Enter the Last Month Test Details</h1>
+        <p>Next step for your metabollic testing!</p>
+        
+        <form method="post" action="{% url 'predictor:prediction_results' %}">
+            {% csrf_token %}
+            <div class="form-grid">
+                
+                {% for field in form %}
+                <div class="form-group">
+                    {% if field.errors %}
+                        {{ field.errors }}
+                    {% endif %}
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                </div>
+                {% endfor %}
+                
+                <button type="submit" class="submit-btn">Generate Test Results</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
